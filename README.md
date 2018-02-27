@@ -1,14 +1,14 @@
 # ModernAlerts
 
 
-Android:
+Android:<br />
 Download https://www.nuget.org/packages/ModernAlerts.Droid/ Nuget Pacakge in Droid Project
 
-Android Initialization in Your Main Activity.
+Android Initialization in Main Activity.<br />
 ```c#
 ModernAlerts.ModernAlertsHelper.GetInstance().Init(this);
 ```
-Like below
+Like below<br />
 ```c#
 public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 {
@@ -23,9 +23,9 @@ public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompa
 ```
 
 
-iOS:
-Download https://www.nuget.org/packages/ModernAlerts.iOS/ get Pacakge in iOS Project
-No Need to initialize for IOS Apps
+iOS:<br />
+Download https://www.nuget.org/packages/ModernAlerts.iOS/ get Pacakge in iOS Project<br />
+No Need to initialize for IOS Apps<br />
 
 Simple Display Alert:
 ```c#
