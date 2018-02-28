@@ -58,7 +58,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Popup\DSDisplayAlertService.cs" />
+    <Compile Include="Helper\DSDisplayAlertService.cs" />
     <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Helper\ProgressWheel.cs" />
     <Compile Include="MainActivity.cs" />

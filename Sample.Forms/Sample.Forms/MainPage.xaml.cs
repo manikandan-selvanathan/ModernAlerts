@@ -24,7 +24,7 @@ namespace Sample.Forms
                 getInputConfig.keyboard = Keyboard.Telephone;
                 getInputConfig.MaxLength = 10;
                 getInputConfig.FontColor = Color.White;
-                ModernAlertsHelper.GetInstance().DisplayAlert(Color.White, Color.Black, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", null, (obj) =>
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Black, Color.White, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", null, (obj) =>
                 {
                     //Logic
                 },true, getInputConfig);
@@ -86,7 +86,7 @@ namespace Sample.Forms
             try
             {
                 string[] numbersarray = new string[] { "1", "2", "3", "4" };
-                ModernAlertsHelper.GetInstance().ShowLoading();
+                //ModernAlertsHelper.GetInstance().ShowLoading();
             }
             catch (Exception ex)
             {

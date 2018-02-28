@@ -5,151 +5,146 @@
     android:id="@+id/root"
     android:minHeight="54dip"
     android:orientation="vertical">
-  <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center_vertical"
-      android:layout_marginTop="6dip"
-      android:layout_marginBottom="9dip"
-      android:layout_marginStart="10dip"
-      android:layout_marginEnd="10dip">
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/header"
-        style="?android:attr/textAppearanceMedium"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:padding="5dp"
-        android:textAlignment="viewStart" />
-    <ImageView
-        android:id="@+id/titleDivider"
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:visibility="gone"
-        android:scaleType="fitXY"
-        android:gravity="fill_horizontal"
-        android:src="@android:drawable/divider_horizontal_dark" />
-  </LinearLayout>
-  <View
-      android:layout_height="1dp"
-      android:layout_marginTop="1dip"
-      android:layout_marginBottom="1dip"
-      android:layout_width="match_parent"
-      android:id="@+id/lineheader" />
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:id="@+id/body_view"
-      android:orientation="vertical">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="2dip"
-        android:paddingBottom="12dip"
-        android:paddingStart="14dip"
-        android:paddingEnd="10dip"
-        android:overScrollMode="ifContentScrolls">
-      <TextView
-          android:id="@+id/body"
-          style="?android:attr/textAppearanceMedium"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:padding="5dip" />
-    </ScrollView>
-  </LinearLayout>
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:visibility="gone"
-    
-    android:id="@+id/get_input_view"
-    android:orientation="vertical">
-
-    <EditText 
-      android:id="@+id/getinput_et"
-       android:layout_marginStart="10dip"
-      android:layout_marginEnd="10dip"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"  />
-
-  </LinearLayout>
-
-  
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:visibility="gone"
-      android:layout_weight="1"
-      android:id="@+id/listview_root"
-      android:orientation="vertical">
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listiview" />
-  </LinearLayout>
-  <View
-      android:layout_height="1dp"
-      android:layout_marginTop="10dip" 
-      android:layout_marginStart="10dip"
-      android:layout_marginEnd="10dip"
-      android:layout_width="match_parent"
-      android:id="@+id/linebody" />
-  <LinearLayout
-      android:id="@+id/buttons"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:minHeight="54dip"
-      android:orientation="vertical">
     <LinearLayout
-        style="?android:attr/buttonBarStyle"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="4dip"
-        android:measureWithLargestChild="true">
-      <LinearLayout
-          android:id="@+id/leftSpacer"
-          android:layout_weight="0.25"
-          android:layout_width="0dip"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:visibility="gone" />
-      <Button
-          android:id="@+id/positinvebutton"
-          android:layout_width="0dip"
-          android:layout_gravity="start"
-          android:visibility="gone"
-          android:layout_weight="1"
-          style="?android:attr/buttonBarButtonStyle"
-          android:maxLines="2"
-          android:layout_height="wrap_content" />
-      <!--<Button android:id="@+id/button3"
+        android:gravity="center_vertical"
+        android:layout_marginTop="6dip"
+        android:layout_marginBottom="9dip"
+        android:layout_marginStart="10dip"
+        android:layout_marginEnd="10dip">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/header"
+            style="?android:attr/textAppearanceMedium"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:padding="5dp"
+            android:textAlignment="viewStart" />
+        <ImageView
+            android:id="@+id/titleDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:gravity="fill_horizontal"
+            android:src="@android:drawable/divider_horizontal_dark" />
+    </LinearLayout>
+    <View
+        android:layout_height="1dp"
+        android:layout_marginTop="1dip"
+        android:layout_marginBottom="1dip"
+        android:layout_width="match_parent"
+        android:id="@+id/lineheader" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/body_view"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dip"
+            android:paddingBottom="12dip"
+            android:paddingStart="14dip"
+            android:paddingEnd="10dip"
+            android:overScrollMode="ifContentScrolls">
+            <TextView
+                android:id="@+id/body"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dip" />
+        </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:id="@+id/get_input_view"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/getinput_et"
+            android:layout_marginStart="10dip"
+            android:layout_marginEnd="10dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_weight="1"
+        android:id="@+id/listview_root"
+        android:orientation="vertical">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listiview" />
+    </LinearLayout>
+    <View
+        android:layout_height="1dp"
+        android:layout_marginTop="10dip"
+        android:layout_marginStart="10dip"
+        android:layout_marginEnd="10dip"
+        android:layout_width="match_parent"
+        android:id="@+id/linebody" />
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="54dip"
+        android:orientation="vertical">
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dip"
+            android:measureWithLargestChild="true">
+            <LinearLayout
+                android:id="@+id/leftSpacer"
+                android:layout_weight="0.25"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone" />
+            <Button
+                android:id="@+id/positinvebutton"
+                android:layout_width="0dip"
+                android:layout_gravity="start"
+                android:visibility="gone"
+                android:layout_weight="1"
+                style="?android:attr/buttonBarButtonStyle"
+                android:maxLines="2"
+                android:layout_height="wrap_content" />
+        <!--<Button android:id="@+id/button3"
                 android:layout_width="0dip"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 style="?android:attr/buttonBarButtonStyle"
                 android:maxLines="2"
                 android:layout_height="wrap_content" />-->
-      <Button
-          android:id="@+id/negativebutton"
-          android:layout_width="0dip"
-          android:layout_gravity="end"
-          android:visibility="gone"
-          android:layout_weight="1"
-          style="?android:attr/buttonBarButtonStyle"
-          android:maxLines="2"
-          android:layout_height="wrap_content" />
-      <LinearLayout
-          android:id="@+id/rightSpacer"
-          android:layout_width="0dip"
-          android:layout_weight="0.25"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:visibility="gone" />
+            <Button
+                android:id="@+id/negativebutton"
+                android:layout_width="0dip"
+                android:layout_gravity="end"
+                android:visibility="gone"
+                android:layout_weight="1"
+                style="?android:attr/buttonBarButtonStyle"
+                android:maxLines="2"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/rightSpacer"
+                android:layout_width="0dip"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
-  </LinearLayout>
 </LinearLayout>
