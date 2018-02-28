@@ -15,6 +15,25 @@ namespace Sample.Forms
 			InitializeComponent();
 		}
 
+        private void GetInput_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                GetInputConfig getInputConfig = new GetInputConfig();
+                getInputConfig.BackgroundColor = Color.Black;
+                getInputConfig.keyboard = Keyboard.Telephone;
+                getInputConfig.MaxLength = 10;
+                getInputConfig.FontColor = Color.White;
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.White, Color.Black, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", null, (obj) =>
+                {
+                    //Logic
+                },true, getInputConfig);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
         private void DisplayAlert_Clicked(object sender, EventArgs e)
         {
             try
@@ -62,6 +81,17 @@ namespace Sample.Forms
             }
         }
 
+        private void DisplayLoader_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] numbersarray = new string[] { "1", "2", "3", "4" };
+                ModernAlertsHelper.GetInstance().ShowLoading();
+            }
+            catch (Exception ex)
+            {
 
+            }
+        }
     }
 }
