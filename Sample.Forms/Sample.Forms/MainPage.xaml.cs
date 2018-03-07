@@ -25,7 +25,7 @@ namespace Sample.Forms
                 getInputConfig.MaxLength = 10;
                 getInputConfig.MinLength = 10;
                 getInputConfig.FontColor = Color.White;
-                ModernAlertsHelper.GetInstance().DisplayAlert(Color.White, Color.Black, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", null, null, (obj) =>
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.White, Color.Black, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", null, (obj) =>
                 {
                     //Logic
                 },true, getInputConfig);

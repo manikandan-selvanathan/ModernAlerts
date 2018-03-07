@@ -27,8 +27,6 @@ namespace ModernAlerts.IOS
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
             {
                 var pushView = UIAlertController.Create(title, "", UIAlertControllerStyle.ActionSheet);
-
-
                 foreach (var item in content)
                 {
                     pushView.AddAction(UIAlertAction.Create(item, UIAlertActionStyle.Default, (action) => callback(item)));
@@ -71,18 +69,22 @@ namespace ModernAlerts.IOS
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
             {
                 var pushView = UIAlertController.Create(title, content, UIAlertControllerStyle.Alert);
-                 
+                var window = UIApplication.SharedApplication.KeyWindow;
+                UIVisualEffect blurEffect = UIBlurEffect.FromStyle(UIBlurEffectStyle.Regular);
+                UIVisualEffectView visualEffectView = new UIVisualEffectView(blurEffect);
+
                 UITextField field = null;
                 var posbut = UIAlertAction.Create(positiveButton, UIAlertActionStyle.Default, (obj) =>
                 {
+                    visualEffectView.RemoveFromSuperview();
                     if (field != null && !string.IsNullOrEmpty(field.Text))
                         callback(field.Text);
                     else
-                        callback(positiveButton);
+                        callback(positiveButton); 
                 });
-            
+
                 if (isGetInput)
-                { 
+                {
                     pushView.AddTextField((textField) =>
                     {
                         field = textField;
@@ -91,23 +93,23 @@ namespace ModernAlerts.IOS
                             UIView[] array2 = pushView.View.Subviews;
                             if (config != null && config.MinLength != 0)
                             {
-                                array2[0].Subviews[0].TintColor = UIColor.Gray; 
+                                array2[0].Subviews[0].TintColor = UIColor.Gray;
                                 posbut.Enabled = false;
                                 field.AddTarget((w, me) =>
-                                { 
+                                {
                                     if (field.Text.Trim().Length >= config.MinLength)
                                     {
                                         array2[0].Subviews[0].TintColor = fontColor.ToUIColor();
-                                        posbut.Enabled = true; 
+                                        posbut.Enabled = true;
                                     }
                                     else
-                                    { 
-                                        array2[0].Subviews[0].TintColor = UIColor.Gray; 
+                                    {
+                                        array2[0].Subviews[0].TintColor = UIColor.Gray;
                                         posbut.Enabled = false;
                                     }
                                 }, UIControlEvent.EditingChanged);
                             }
-                        } 
+                        }
                         if (config != null)
                         {
                             if (config.keyboard == Keyboard.Telephone)
@@ -134,19 +136,19 @@ namespace ModernAlerts.IOS
 
                 }
                 pushView.AddAction(posbut);
-                
+
 
                 //Customization/Hack
                 UIView[] array = pushView.View.Subviews;
 
                 if (config != null && config.MinLength != 0)
                 {
-                    array[0].Subviews[0].TintColor = UIColor.Gray; 
+                    array[0].Subviews[0].TintColor = UIColor.Gray;
                 }
                 else
                 {
                     array[0].Subviews[0].TintColor = fontColor.ToUIColor();
-                } 
+                }
                 foreach (var item in array[0].Subviews[0].Subviews[0].Subviews)
                 {
                     item.BackgroundColor = backgroundcolor.ToUIColor();
@@ -155,19 +157,23 @@ namespace ModernAlerts.IOS
                 {
                     ForegroundColor = fontColor.ToUIColor(),
                 };
+                
                 pushView.SetValueForKey(new NSAttributedString(title, titlecolor), new NSString("attributedTitle"));
                 pushView.SetValueForKey(new NSAttributedString(content, titlecolor), new NSString("attributedMessage"));
                 if (negativeButton != null)
                 {
                     pushView.AddAction(UIAlertAction.Create(negativeButton, UIAlertActionStyle.Cancel, (obj) =>
                     {
+                        visualEffectView.RemoveFromSuperview();
                         callback(negativeButton);
                     }));
                 }
 
-                var window = UIApplication.SharedApplication.KeyWindow;
+                
                 window.MakeKeyAndVisible();
                 window.RootViewController.PresentViewController(pushView, true, null); 
+                visualEffectView.Frame = window.RootViewController.View.Bounds;
+                window.RootViewController.View.AddSubview(visualEffectView);
             });
 
             return true;
