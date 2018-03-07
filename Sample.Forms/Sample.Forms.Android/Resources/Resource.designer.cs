@@ -3568,7 +3568,7 @@ namespace ModernAlerts.Droid
 			public const int abc_select_dialog_material = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int AlertDialogAlertLayout = 2130903067;
+			public const int customized_alertdialog = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
 			public const int design_bottom_navigation_item = 2130903068;

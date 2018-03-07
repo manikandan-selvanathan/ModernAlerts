@@ -72,7 +72,7 @@
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\AlertDialogAlertLayout.axml">
+    <AndroidResource Include="Resources\layout\customized_alertdialog.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\listview_light.axml" />
