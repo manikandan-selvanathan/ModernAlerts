@@ -34,6 +34,22 @@ ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern Al
     //Logic
 });
 ```
+
+Simple Get Input Alert: <br />
+```c# 
+GetInputConfig getInputConfig = new GetInputConfig();
+getInputConfig.BackgroundColor = Color.White;
+getInputConfig.keyboard = Keyboard.Telephone;
+getInputConfig.MaxLength = 10;
+getInputConfig.FontColor = Color.Black;
+ModernAlertsHelper.GetInstance().DisplayAlert(Color.Black, Color.White, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", null, (obj) =>
+{
+
+//Logic
+
+}, true, getInputConfig);
+```
+
 Confirmation Alert:
 ```c#
 ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red,Color.White, "Modern Alert Confirmation Header","Modern Alert Confirmation Body", "Yes", "No", (obj) =>
