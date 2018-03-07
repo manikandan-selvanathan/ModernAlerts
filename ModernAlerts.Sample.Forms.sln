@@ -12,7 +12,9 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Sample.Forms\Sample.Forms\Sample.Forms.projitems*{1f35fb03-bad2-406b-90e2-f7a54927b607}*SharedItemsImports = 13
+		..\Plugin\ModernAlert.Shared\ModernAlert.Shared.projitems*{26e67357-17c9-4185-a76f-36959395d2b9}*SharedItemsImports = 4
 		Sample.Forms\Sample.Forms\Sample.Forms.projitems*{26e67357-17c9-4185-a76f-36959395d2b9}*SharedItemsImports = 4
+		..\Plugin\ModernAlert.Shared\ModernAlert.Shared.projitems*{f819d0dd-f2bf-478f-8252-af5a5be3a7ab}*SharedItemsImports = 4
 		Sample.Forms\Sample.Forms\Sample.Forms.projitems*{f819d0dd-f2bf-478f-8252-af5a5be3a7ab}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
