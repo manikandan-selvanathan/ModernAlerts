@@ -26,12 +26,24 @@ namespace ModernAlerts.IOS
         {
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
             {
+                var window = UIApplication.SharedApplication.KeyWindow;
+                UIVisualEffect blurEffect = UIBlurEffect.FromStyle(UIBlurEffectStyle.Regular);
+                UIVisualEffectView visualEffectView = new UIVisualEffectView(blurEffect);
+
                 var pushView = UIAlertController.Create(title, "", UIAlertControllerStyle.ActionSheet);
                 foreach (var item in content)
                 {
-                    pushView.AddAction(UIAlertAction.Create(item, UIAlertActionStyle.Default, (action) => callback(item)));
+                    pushView.AddAction(UIAlertAction.Create(item, UIAlertActionStyle.Default, (action) =>
+                    {
+                        visualEffectView.RemoveFromSuperview();
+                        callback(item);
+                    }));
                 }
-                pushView.AddAction(UIAlertAction.Create(negativeButton, UIAlertActionStyle.Destructive, (action) => callback(negativeButton)));
+                pushView.AddAction(UIAlertAction.Create(negativeButton, UIAlertActionStyle.Destructive, (action) =>
+                {
+                    visualEffectView.RemoveFromSuperview();
+                    callback(negativeButton);
+                }));
 
                 //Customization/Hack
                 UIView[] array = pushView.View.Subviews;
@@ -48,7 +60,7 @@ namespace ModernAlerts.IOS
                 pushView.SetValueForKey(new NSAttributedString(title, titlecolor), new NSString("attributedTitle"));
                 pushView.SetValueForKey(new NSAttributedString("", titlecolor), new NSString("attributedMessage"));
                 UIPopoverPresentationController presentationPopover = pushView.PopoverPresentationController;
-                var window = UIApplication.SharedApplication.KeyWindow;
+
                 if (presentationPopover != null)
                 {
                     presentationPopover.SourceView = window;
@@ -56,6 +68,8 @@ namespace ModernAlerts.IOS
                 }
                 window.MakeKeyAndVisible();
                 window.RootViewController.PresentViewController(pushView, true, null);
+                visualEffectView.Frame = window.RootViewController.View.Bounds;
+                window.RootViewController.View.AddSubview(visualEffectView);
 
             });
 
@@ -72,7 +86,6 @@ namespace ModernAlerts.IOS
                 var window = UIApplication.SharedApplication.KeyWindow;
                 UIVisualEffect blurEffect = UIBlurEffect.FromStyle(UIBlurEffectStyle.Regular);
                 UIVisualEffectView visualEffectView = new UIVisualEffectView(blurEffect);
-
                 UITextField field = null;
                 var posbut = UIAlertAction.Create(positiveButton, UIAlertActionStyle.Default, (obj) =>
                 {
@@ -80,9 +93,8 @@ namespace ModernAlerts.IOS
                     if (field != null && !string.IsNullOrEmpty(field.Text))
                         callback(field.Text);
                     else
-                        callback(positiveButton); 
+                        callback(positiveButton);
                 });
-
                 if (isGetInput)
                 {
                     pushView.AddTextField((textField) =>
@@ -133,7 +145,6 @@ namespace ModernAlerts.IOS
                         field.ReturnKeyType = UIReturnKeyType.Done;
                         field.BorderStyle = UITextBorderStyle.RoundedRect;
                     });
-
                 }
                 pushView.AddAction(posbut);
 
@@ -157,7 +168,7 @@ namespace ModernAlerts.IOS
                 {
                     ForegroundColor = fontColor.ToUIColor(),
                 };
-                
+
                 pushView.SetValueForKey(new NSAttributedString(title, titlecolor), new NSString("attributedTitle"));
                 pushView.SetValueForKey(new NSAttributedString(content, titlecolor), new NSString("attributedMessage"));
                 if (negativeButton != null)
@@ -168,10 +179,8 @@ namespace ModernAlerts.IOS
                         callback(negativeButton);
                     }));
                 }
-
-                
                 window.MakeKeyAndVisible();
-                window.RootViewController.PresentViewController(pushView, true, null); 
+                window.RootViewController.PresentViewController(pushView, true, null);
                 visualEffectView.Frame = window.RootViewController.View.Bounds;
                 window.RootViewController.View.AddSubview(visualEffectView);
             });

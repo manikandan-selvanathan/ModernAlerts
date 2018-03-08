@@ -135,7 +135,7 @@ namespace ModernAlerts.Droid
                     var buttons = alertLayout.FindViewById<LinearLayout>(Resource.Id.buttons);
                     var button1 = alertLayout.FindViewById<Android.Widget.Button>(Resource.Id.positinvebutton);
                     var getinput_et = alertLayout.FindViewById<Android.Widget.EditText>(Resource.Id.getinput_et);
-                    header.Text = fromHtml(content).ToString();
+                    header.Text = fromHtml(title).ToString();
                     body.Text = fromHtml(content).ToString(); 
                     header.SetTextColor(fontColor.ToAndroid());
                     body.SetTextColor(fontColor.ToAndroid());
