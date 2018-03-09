@@ -24,8 +24,9 @@ namespace Sample.Forms
                 getInputConfig.keyboard = Keyboard.Telephone;
                 getInputConfig.MaxLength = 10;
                 getInputConfig.MinLength = 10;
+                getInputConfig.placeholder = "Enter asdf";
                 getInputConfig.FontColor = Color.White;
-                ModernAlertsHelper.GetInstance().DisplayAlert(Color.White, Color.Black, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", null, (obj) =>
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Black, Color.White, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", "CANCEL", (obj) =>
                 {
                     //Logic
                 },true, getInputConfig);

@@ -135,8 +135,10 @@ namespace ModernAlerts.Droid
                     var buttons = alertLayout.FindViewById<LinearLayout>(Resource.Id.buttons);
                     var button1 = alertLayout.FindViewById<Android.Widget.Button>(Resource.Id.positinvebutton);
                     var getinput_et = alertLayout.FindViewById<Android.Widget.EditText>(Resource.Id.getinput_et);
-                    header.Text = fromHtml(title).ToString();
-                    body.Text = fromHtml(content).ToString(); 
+                    getinput_et.SetHintTextColor(Color.Gray.ToAndroid());
+                    
+                    header.Text = title;
+                    body.Text = content;
                     header.SetTextColor(fontColor.ToAndroid());
                     body.SetTextColor(fontColor.ToAndroid());
                     buttons.SetBackgroundColor(backgroundcolor.ToAndroid());
@@ -193,6 +195,7 @@ namespace ModernAlerts.Droid
                         {
                             getinput_et.SetBackgroundColor(config.BackgroundColor.ToAndroid());
                             getinput_et.SetTextColor(config.FontColor.ToAndroid());
+                            getinput_et.Hint=config.placeholder;
                             if (config.keyboard == Keyboard.Telephone)
                             {
                                 getinput_et.InputType = InputTypes.ClassPhone;

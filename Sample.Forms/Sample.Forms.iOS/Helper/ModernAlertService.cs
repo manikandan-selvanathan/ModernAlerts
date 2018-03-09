@@ -111,12 +111,13 @@ namespace ModernAlerts.IOS
                                 {
                                     if (field.Text.Trim().Length >= config.MinLength)
                                     {
-                                        array2[0].Subviews[0].TintColor = fontColor.ToUIColor();
+                                        pushView.View.TintColor=fontColor.ToUIColor();
+                                        //array2[0].Subviews[0].Subviews[1].TintColor = fontColor.ToUIColor();
                                         posbut.Enabled = true;
                                     }
                                     else
                                     {
-                                        array2[0].Subviews[0].TintColor = UIColor.Gray;
+                                        //array2[0].Subviews[0].TintColor = UIColor.Gray;
                                         posbut.Enabled = false;
                                     }
                                 }, UIControlEvent.EditingChanged);
@@ -154,7 +155,9 @@ namespace ModernAlerts.IOS
 
                 if (config != null && config.MinLength != 0)
                 {
-                    array[0].Subviews[0].TintColor = UIColor.Gray;
+                    //TODO:Need to Fix this
+                    //array[0].Subviews[0].TintColor = UIColor.Gray;
+                    array[0].Subviews[0].Subviews[1].TintColor = fontColor.ToUIColor();
                 }
                 else
                 {
@@ -164,13 +167,19 @@ namespace ModernAlerts.IOS
                 {
                     item.BackgroundColor = backgroundcolor.ToUIColor();
                 }
+                UIStringAttributes bodycolor = new UIStringAttributes
+                {
+                    ForegroundColor = fontColor.ToUIColor(), 
+                };
+
                 UIStringAttributes titlecolor = new UIStringAttributes
                 {
                     ForegroundColor = fontColor.ToUIColor(),
+                    Font = UIFont.FromName("Helvetica-Bold", 18f)
                 };
 
                 pushView.SetValueForKey(new NSAttributedString(title, titlecolor), new NSString("attributedTitle"));
-                pushView.SetValueForKey(new NSAttributedString(content, titlecolor), new NSString("attributedMessage"));
+                pushView.SetValueForKey(new NSAttributedString(content, bodycolor), new NSString("attributedMessage"));
                 if (negativeButton != null)
                 {
                     pushView.AddAction(UIAlertAction.Create(negativeButton, UIAlertActionStyle.Cancel, (obj) =>
