@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Android;
 using Android.Content;
 using Android.Content.PM;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
@@ -32,9 +33,9 @@ namespace ModernAlerts.Droid
             return await Task.Run(() => ShowActionSheet(backgroundcolor, fontColor, title, list, cancelButton, callback));
         }
 
-        public async Task<bool> DisplayAlert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton, Action<string> callback, bool isGetInput, InputConfig getinputConfig)
+        public async Task<bool> DisplayAlert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton, string neutralbutton, Action<string> callback, bool isGetInput, InputConfig getinputConfig)
         {
-            return await Task.Run(() => Alert(backgroundcolor, fontColor, title, content, isGetInput, positiveButton, negativeButton, callback, getinputConfig));
+            return await Task.Run(() => Alert(backgroundcolor, fontColor, title, content, isGetInput, positiveButton, negativeButton, neutralbutton, callback, getinputConfig));
         }
 
         private bool ShowActionSheet(Color backgroundcolor, Color fontColor, string title, string[] content, string negativeButton, Action<string> callback)
@@ -62,7 +63,8 @@ namespace ModernAlerts.Droid
                     AlertDialogListViewAdapter adapter = new AlertDialogListViewAdapter(ModernAlertsHelper.currentActivity, content, backgroundcolor.ToAndroid(), fontColor.ToAndroid());
                     lv.Adapter = adapter;
                     lv.SetDrawSelectorOnTop(true);
-                    lv.Divider = null;
+                    lv.Divider = new ColorDrawable(Color.LightGray.ToAndroid());
+                    lv.DividerHeight = 2;
                     var header = convertView.FindViewById<TextView>(Resource.Id.header);
                     var root = convertView.FindViewById<LinearLayout>(Resource.Id.root);
                     var lineheader = convertView.FindViewById(Resource.Id.lineheader);
@@ -108,7 +110,7 @@ namespace ModernAlerts.Droid
         }
 
 
-        private bool Alert(Color backgroundcolor, Color fontColor, string title, string content, bool isGetInput, string positiveButton, string negativeButton, Action<string> callback, InputConfig config)
+        private bool Alert(Color backgroundcolor, Color fontColor, string title, string content, bool isGetInput, string positiveButton, string negativeButton, string neutralButton, Action<string> callback, InputConfig config)
         {
             bool alercon = false;
             if (ModernAlertsHelper.currentActivity == null)
@@ -126,6 +128,7 @@ namespace ModernAlerts.Droid
                     var alertLayout = inflater.Inflate(Resource.Layout.customized_alertdialog, null);
                     dialogBuilder.SetView(alertLayout);
                     var header = alertLayout.FindViewById<TextView>(Resource.Id.header);
+                    LinearLayout bv = (LinearLayout)alertLayout.FindViewById(Resource.Id.body_view);
                     var lineheader = alertLayout.FindViewById(Resource.Id.lineheader);
                     lineheader.SetBackgroundColor(fontColor.ToAndroid());
                     var linebody = alertLayout.FindViewById(Resource.Id.linebody);
@@ -135,10 +138,18 @@ namespace ModernAlerts.Droid
                     var buttons = alertLayout.FindViewById<LinearLayout>(Resource.Id.buttons);
                     var button1 = alertLayout.FindViewById<Android.Widget.Button>(Resource.Id.positinvebutton);
                     var getinput_et = alertLayout.FindViewById<Android.Widget.EditText>(Resource.Id.getinput_et);
+                    
                     getinput_et.SetHintTextColor(Color.Gray.ToAndroid());
                     
                     header.Text = title;
-                    body.Text = content;
+                    if(string.IsNullOrEmpty(content))
+                    {
+                        bv.Visibility = ViewStates.Gone;
+                    }
+                    else
+                    {
+                        body.Text = content;
+                    } 
                     header.SetTextColor(fontColor.ToAndroid());
                     body.SetTextColor(fontColor.ToAndroid());
                     buttons.SetBackgroundColor(backgroundcolor.ToAndroid());
@@ -189,13 +200,15 @@ namespace ModernAlerts.Droid
                     if (isGetInput)
                     {
                         var getinputll = alertLayout.FindViewById<LinearLayout>(Resource.Id.get_input_view);
-                    
-                    
+                        
                         if (config != null)
                         {
                             getinput_et.SetBackgroundColor(config.BackgroundColor.ToAndroid());
                             getinput_et.SetTextColor(config.FontColor.ToAndroid());
                             getinput_et.Hint=config.placeholder;
+                            if (!string.IsNullOrEmpty(config.DefaultValue))
+                                getinput_et.Text = config.DefaultValue;
+
                             if (config.keyboard == Keyboard.Telephone)
                             {
                                 getinput_et.InputType = InputTypes.ClassPhone;
@@ -206,7 +219,19 @@ namespace ModernAlerts.Droid
                             }
                             else if (config.keyboard == Keyboard.Text)
                             {
-                                getinput_et.InputType = InputTypes.ClassText;
+                                if (config.isMultipleLine)
+                                {
+                                    getinput_et.InputType = InputTypes.TextFlagMultiLine;
+                                    getinput_et.SetHorizontallyScrolling(false);
+                                    //getinput_et.SetMinLines(3);
+                                    getinput_et.SetLines(3);
+                                }
+                                else
+                                {
+                                    getinput_et.InputType = InputTypes.ClassText;
+                                }
+
+                               
                             }
                             else if (config.keyboard == Keyboard.Email)
                             {
@@ -229,7 +254,23 @@ namespace ModernAlerts.Droid
                             alertdialog.Dismiss();
                         });
                     }
+                    if (neutralButton != null)
+                    {
+                        var button3 = alertLayout.FindViewById<Android.Widget.Button>(Resource.Id.neutralbutton);
+                        button3.Visibility = ViewStates.Visible;
+                        button3.Text = neutralButton;
+                        button3.SetTextColor(fontColor.ToAndroid());
+                        button3.Click += ((si, e) =>
+                        {
+                            callback(neutralButton);
+                            alertdialog.Dismiss();
+                        });
+                    }
                     alertdialog = dialogBuilder.Create();
+                    if (isGetInput)
+                    {
+                        alertdialog.Window.SetSoftInputMode(SoftInput.StateAlwaysVisible);
+                    }
                     alertdialog.Show();
                     ShowShadow(alertdialog);
                 });

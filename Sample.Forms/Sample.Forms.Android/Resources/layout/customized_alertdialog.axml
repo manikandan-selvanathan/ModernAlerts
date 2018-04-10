@@ -113,26 +113,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:visibility="gone" />
-            <Button
-                android:id="@+id/positinvebutton"
+              <Button
+                android:id="@+id/neutralbutton"
                 android:layout_width="0dip"
-                android:layout_gravity="start"
+                android:layout_gravity="end"
+                android:visibility="gone"
+                android:layout_weight="1"
+                style="?android:attr/buttonBarButtonStyle"
+                android:maxLines="2"
+                android:layout_height="wrap_content" /> 
+            <Button
+                android:id="@+id/negativebutton"
+                android:layout_width="0dip"
+                android:layout_gravity="end"
                 android:visibility="gone"
                 android:layout_weight="1"
                 style="?android:attr/buttonBarButtonStyle"
                 android:maxLines="2"
                 android:layout_height="wrap_content" />
-        <!--<Button android:id="@+id/button3"
+           <Button
+                android:id="@+id/positinvebutton"
                 android:layout_width="0dip"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                style="?android:attr/buttonBarButtonStyle"
-                android:maxLines="2"
-                android:layout_height="wrap_content" />-->
-            <Button
-                android:id="@+id/negativebutton"
-                android:layout_width="0dip"
-                android:layout_gravity="end"
+                android:layout_gravity="start"
                 android:visibility="gone"
                 android:layout_weight="1"
                 style="?android:attr/buttonBarButtonStyle"

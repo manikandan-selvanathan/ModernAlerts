@@ -8,28 +8,48 @@ using Xamarin.Forms;
 
 namespace Sample.Forms
 {
-	public partial class MainPage : ContentPage
-	{
-		public MainPage()
-		{
-			InitializeComponent();
-		}
+    public partial class MainPage : ContentPage
+    {
+        public MainPage()
+        {
+            InitializeComponent();
+        }
 
         private void GetInput_Clicked(object sender, EventArgs e)
         {
             try
             {
-                InputConfig getInputConfig = new InputConfig();
-                getInputConfig.BackgroundColor = Color.Black;
-                getInputConfig.keyboard = Keyboard.Telephone;
-                getInputConfig.MaxLength = 10;
-                getInputConfig.MinLength = 10;
-                getInputConfig.placeholder = "Enter asdf";
-                getInputConfig.FontColor = Color.White;
-                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Black, Color.White, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", "CANCEL", (obj) =>
+
+                var noteInput = new InputConfig()
                 {
-                    //Logic
-                },true, getInputConfig);
+                    BackgroundColor = Color.White,
+                    keyboard = Keyboard.Numeric,
+                    FontColor = Color.Black,
+                    isMultipleLine = true
+                };
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Black, Color.White, "Add Note", "", "save", "Cancel", null, (obj) =>
+                {
+                    if (string.IsNullOrEmpty(obj))
+                        return;
+                    if (obj != "Cancel")
+                    {
+                    }
+                }, true, noteInput);
+
+
+
+                //InputConfig getInputConfig = new InputConfig();
+                //getInputConfig.BackgroundColor = Color.Black;
+                //getInputConfig.keyboard = Keyboard.Telephone;
+                //getInputConfig.MaxLength = 30;
+                //getInputConfig.MinLength = 10;
+                //getInputConfig.placeholder = "Enter asdf";
+                //getInputConfig.FontColor = Color.White;
+                //getInputConfig.DefaultValue = "Default Value";
+                //ModernAlertsHelper.GetInstance().DisplayAlert(Color.Black, Color.White, "Modern Alerts Simple Alert", "Modern Alerts Simple Alert Body", "OK", "CANCEL",null, (obj) =>
+                //{
+                //    //Logic
+                //},true, getInputConfig);
             }
             catch (Exception ex)
             {
@@ -40,12 +60,12 @@ namespace Sample.Forms
         {
             try
             {
-                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern Alerts Simple Alert", "Modern Alerts Simple </br> Alert </br>Body ", "OK", null, (obj) =>
-                {
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern Alerts Simple Alert", "Modern Alerts Simple </br> Alert </br>Body ", "OK", null, null, (obj) =>
+                 {
                     //Logic
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -54,9 +74,9 @@ namespace Sample.Forms
         {
             try
             {
-                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern Alert Confirmation Header", "Modern Alert Confirmation Body", "Yes", "No", (obj) =>
-                {
-                    if (obj == null) return;
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern Alert Confirmation Header", "Modern Alert Confirmation Body", "Yes", "No", "MayBe", (obj) =>
+                 {
+                     if (obj == null) return;
                     //Logic
                 });
             }
