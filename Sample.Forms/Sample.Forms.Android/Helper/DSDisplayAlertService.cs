@@ -33,7 +33,7 @@ namespace ModernAlerts.Droid
             return await Task.Run(() => ShowActionSheet(backgroundcolor, fontColor, title, list, cancelButton, callback));
         }
 
-        public async Task<bool> DisplayAlert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton, string neutralbutton, Action<string> callback, bool isGetInput, InputConfig getinputConfig)
+        public async Task<bool> DisplayAlert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton, string neutralbutton, Action<string> callback, bool isGetInput, InputConfig getinputConfig, bool iscontentleftalign = false)
         {
             return await Task.Run(() => Alert(backgroundcolor, fontColor, title, content, isGetInput, positiveButton, negativeButton, neutralbutton, callback, getinputConfig));
         }

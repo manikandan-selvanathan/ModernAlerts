@@ -18,9 +18,9 @@ namespace ModernAlerts.IOS
             return await Task.Run(() => ShowActionSheet(backgroundcolor, fontColor, title, list, cancelButton, callback));
         }
 
-        public async Task<bool> DisplayAlert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton,string neutralButton, Action<string> callback, bool isGetInput, InputConfig getinputConfig = null)
+        public async Task<bool> DisplayAlert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton,string neutralButton, Action<string> callback, bool isGetInput, InputConfig getinputConfig = null, bool iscontentleftalign=false)
         {
-            return await Task.Run(() => Alert(backgroundcolor, fontColor, title, content, positiveButton, negativeButton, neutralButton, callback, getinputConfig, isGetInput));
+            return await Task.Run(() => Alert(backgroundcolor, fontColor, title, content, positiveButton, negativeButton, neutralButton, callback, getinputConfig, isGetInput, iscontentleftalign));
         }
 
         private bool ShowActionSheet(Color backgroundcolor, Color fontColor, string title, string[] content, string negativeButton, Action<string> callback)
@@ -29,9 +29,9 @@ namespace ModernAlerts.IOS
             {
                 var window = UIApplication.SharedApplication.KeyWindow;
                 var visualEffectView = GetTransparentView(); 
-                var pushView = UIAlertController.Create(title,string.Empty, UIAlertControllerStyle.ActionSheet);
+                var pushView = UIAlertController.Create(title,null, UIAlertControllerStyle.ActionSheet);
                 foreach (var item in content)
-                {
+                { 
                     pushView.AddAction(UIAlertAction.Create(item, UIAlertActionStyle.Default, (action) =>
                     {
                         visualEffectView.RemoveFromSuperview();
@@ -50,13 +50,14 @@ namespace ModernAlerts.IOS
                 foreach (var item in array[0].Subviews[0].Subviews[0].Subviews)
                 {
                     item.BackgroundColor = backgroundcolor.ToUIColor();
-                }
+                } 
                 UIStringAttributes titlecolor = new UIStringAttributes
                 {
                     ForegroundColor = fontColor.ToUIColor(),
+                    Font = UIFont.FromName("Helvetica-Bold", 18f),
                 };
                 pushView.SetValueForKey(new NSAttributedString(title, titlecolor), new NSString("attributedTitle"));
-                pushView.SetValueForKey(new NSAttributedString("", titlecolor), new NSString("attributedMessage"));
+                //pushView.SetValueForKey(new NSAttributedString("", titlecolor), new NSString("attributedMessage"));
                 UIPopoverPresentationController presentationPopover = pushView.PopoverPresentationController; 
                 if (presentationPopover != null)
                 {
@@ -83,6 +84,13 @@ namespace ModernAlerts.IOS
             return visualEffectView;
         }
 
+
+        NSMutableParagraphStyle GetLeftAlignStyle()
+        {
+            NSMutableParagraphStyle style = new NSMutableParagraphStyle();
+            style.Alignment = UITextAlignment.Left;
+            return style;
+        }
         UIVisualEffectView GetBlurView()
         {
             UIVisualEffect blurEffect = UIBlurEffect.FromStyle(UIBlurEffectStyle.Prominent);
@@ -93,7 +101,7 @@ namespace ModernAlerts.IOS
         }
 
 
-        private bool Alert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton,string neutralButton, Action<string> callback, InputConfig config, bool isGetInput)
+        private bool Alert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton,string neutralButton, Action<string> callback, InputConfig config, bool isGetInput,bool iscontentleftalign)
         {
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
             {
@@ -200,22 +208,29 @@ namespace ModernAlerts.IOS
                 {
                     item.BackgroundColor = backgroundcolor.ToUIColor();
                 }
-                UIStringAttributes bodycolor = new UIStringAttributes
+                 
+                UIStringAttributes bodystyle = new UIStringAttributes
                 {
                     ForegroundColor = fontColor.ToUIColor(), 
                 };
 
-                NSMutableParagraphStyle style = new NSMutableParagraphStyle();
-                style.Alignment = UITextAlignment.Left;
+                if (iscontentleftalign)
+                {
+                    NSMutableParagraphStyle style = new NSMutableParagraphStyle();
+                    style.Alignment = UITextAlignment.Left;
+                    bodystyle.ParagraphStyle = style;
+                    
+                } 
+
                 UIStringAttributes titlecolor = new UIStringAttributes
                 {
                     ForegroundColor = fontColor.ToUIColor(),
                     Font = UIFont.FromName("Helvetica-Bold", 18f),
-                    ParagraphStyle= style
+                   
                 };
 
                 pushView.SetValueForKey(new NSAttributedString(title, titlecolor), new NSString("attributedTitle"));
-                pushView.SetValueForKey(new NSAttributedString(content, bodycolor), new NSString("attributedMessage"));
+                pushView.SetValueForKey(new NSAttributedString(content, bodystyle), new NSString("attributedMessage"));
                 if (negativeButton != null)
                 {
                     pushView.AddAction(UIAlertAction.Create(negativeButton, UIAlertActionStyle.Cancel, (obj) =>

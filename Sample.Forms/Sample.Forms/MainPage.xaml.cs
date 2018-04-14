@@ -60,10 +60,10 @@ namespace Sample.Forms
         {
             try
             {
-                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern Alerts Simple Alert", "Modern Alerts Simple </br> Alert </br>Body ", "OK", null, null, (obj) =>
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern", "Modern Alerts Simple </br> Alert </br>Body ", "OK", null, null, (obj) =>
                  {
                     //Logic
-                });
+                }, iscontentleftalign:true);
             }
             catch (Exception ex)
             {
