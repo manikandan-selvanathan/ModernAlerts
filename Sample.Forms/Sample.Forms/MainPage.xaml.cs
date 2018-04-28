@@ -74,7 +74,7 @@ namespace Sample.Forms
         {
             try
             {
-                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern Alert Confirmation Header", "Modern Alert Confirmation Body", "Yes", "No", "MayBe", (obj) =>
+                ModernAlertsHelper.GetInstance().DisplayAlert(Color.Red, Color.White, "Modern Alert Confirmation Header", "Modern Alert Confirmation Body", "Yes", "No", null, (obj) =>
                  {
                      if (obj == null) return;
                     //Logic

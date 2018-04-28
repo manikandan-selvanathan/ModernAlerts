@@ -33,7 +33,7 @@ namespace ModernAlerts.Droid
             return await Task.Run(() => ShowActionSheet(backgroundcolor, fontColor, title, list, cancelButton, callback));
         }
 
-        public async Task<bool> DisplayAlert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton, string neutralbutton, Action<string> callback, bool isGetInput, InputConfig getinputConfig, bool iscontentleftalign = false)
+        public async Task<bool> DisplayAlert(Color backgroundcolor, Color fontColor, string title, string content, string positiveButton, string negativeButton, string neutralbutton, Action<string> callback, bool isGetInput, InputConfig getinputConfig, bool iscontentleftalign)
         {
             return await Task.Run(() => Alert(backgroundcolor, fontColor, title, content, isGetInput, positiveButton, negativeButton, neutralbutton, callback, getinputConfig));
         }
@@ -88,15 +88,15 @@ namespace ModernAlerts.Droid
                         alertdialog.Dismiss();
                     });
                     lv.ItemClick += ((sd, w) =>
-                      {
-                          callback(content[w.Position]);
-                          alertdialog.Dismiss();
-                      });
+                    {
+                        callback(content[w.Position]);
+                        alertdialog.Dismiss();
+                    });
                     lv.ItemSelected += ((sd, w) =>
-                      {
-                          callback(content[w.Position]);
-                          alertdialog.Dismiss();
-                      });
+                    {
+                        callback(content[w.Position]);
+                        alertdialog.Dismiss();
+                    });
                     alertdialog = dialogBuilder.Create();
                     alertdialog.Show();
                     ShowShadow(alertdialog);
@@ -138,18 +138,18 @@ namespace ModernAlerts.Droid
                     var buttons = alertLayout.FindViewById<LinearLayout>(Resource.Id.buttons);
                     var button1 = alertLayout.FindViewById<Android.Widget.Button>(Resource.Id.positinvebutton);
                     var getinput_et = alertLayout.FindViewById<Android.Widget.EditText>(Resource.Id.getinput_et);
-                    
+
                     getinput_et.SetHintTextColor(Color.Gray.ToAndroid());
-                    
+
                     header.Text = title;
-                    if(string.IsNullOrEmpty(content))
+                    if (string.IsNullOrEmpty(content))
                     {
                         bv.Visibility = ViewStates.Gone;
                     }
                     else
                     {
                         body.Text = content;
-                    } 
+                    }
                     header.SetTextColor(fontColor.ToAndroid());
                     body.SetTextColor(fontColor.ToAndroid());
                     buttons.SetBackgroundColor(backgroundcolor.ToAndroid());
@@ -181,7 +181,7 @@ namespace ModernAlerts.Droid
                             button1.Enabled = false;
                             getinput_et.TextChanged += (w, me) =>
                             {
-                                if(getinput_et.Text.Trim().Length>=config.MinLength)
+                                if (getinput_et.Text.Trim().Length >= config.MinLength)
                                 {
                                     button1.Enabled = true;
                                     //button1.Background.Alpha = 0;
@@ -194,18 +194,18 @@ namespace ModernAlerts.Droid
                                     button1.Enabled = false;
                                 }
                             };
-                        }                        
+                        }
                     }
-                   
+
                     if (isGetInput)
                     {
                         var getinputll = alertLayout.FindViewById<LinearLayout>(Resource.Id.get_input_view);
-                        
+
                         if (config != null)
                         {
                             getinput_et.SetBackgroundColor(config.BackgroundColor.ToAndroid());
                             getinput_et.SetTextColor(config.FontColor.ToAndroid());
-                            getinput_et.Hint=config.placeholder;
+                            getinput_et.Hint = config.placeholder;
                             if (!string.IsNullOrEmpty(config.DefaultValue))
                                 getinput_et.Text = config.DefaultValue;
 
@@ -231,13 +231,13 @@ namespace ModernAlerts.Droid
                                     getinput_et.InputType = InputTypes.ClassText;
                                 }
 
-                               
+
                             }
                             else if (config.keyboard == Keyboard.Email)
                             {
                                 getinput_et.InputType = InputTypes.TextVariationEmailAddress;
                             }
-                            if(config.MaxLength!=0)
+                            if (config.MaxLength != 0)
                                 getinput_et.SetFilters(new IInputFilter[] { new InputFilterLengthFilter(config.MaxLength) });
                         }
                         getinputll.Visibility = ViewStates.Visible;
@@ -253,6 +253,10 @@ namespace ModernAlerts.Droid
                             callback(negativeButton);
                             alertdialog.Dismiss();
                         });
+
+                        var second_separator_line = alertLayout.FindViewById(Resource.Id.second_separator_line);
+                        second_separator_line.SetBackgroundColor(fontColor.ToAndroid());
+                        second_separator_line.Visibility = ViewStates.Visible;
                     }
                     if (neutralButton != null)
                     {
@@ -265,6 +269,9 @@ namespace ModernAlerts.Droid
                             callback(neutralButton);
                             alertdialog.Dismiss();
                         });
+                        var first_separator_line = alertLayout.FindViewById(Resource.Id.first_separator_line);
+                        first_separator_line.SetBackgroundColor(fontColor.ToAndroid());
+                        first_separator_line.Visibility = ViewStates.Visible;
                     }
                     alertdialog = dialogBuilder.Create();
                     if (isGetInput)
@@ -325,7 +332,7 @@ namespace ModernAlerts.Droid
                 alertdialog.Window.Attributes = lp;
                 alertdialog.Window.AddFlags(WindowManagerFlags.BlurBehind);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
