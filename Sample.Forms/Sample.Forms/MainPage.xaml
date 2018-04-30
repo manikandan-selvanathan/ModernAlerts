@@ -9,6 +9,6 @@
         <Button Text="Get Input Alert" Clicked="GetInput_Clicked" />
         <Button Text="Confirmation" Clicked="DisplayConfirmation_Clicked" />
         <Button Text="Action Sheet" Clicked="DisplayActionSheet_Clicked" />
-        <Button Text="Load Loader" Clicked="DisplayLoader_Clicked" />
+        <!--<Button Text="Load Loader" Clicked="DisplayLoader_Clicked" />-->
     </StackLayout>
 </ContentPage>

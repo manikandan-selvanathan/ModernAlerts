@@ -23,9 +23,10 @@ namespace Sample.Forms
                 var noteInput = new InputConfig()
                 {
                     BackgroundColor = Color.White,
-                    keyboard = Keyboard.Numeric,
-                    FontColor = Color.Black,
-                    isMultipleLine = true
+                    keyboard = Keyboard.Text,
+                    FontColor = Color.Red,
+                    isMultipleLine = true,
+                    DefaultValue="Test"
                 };
                 ModernAlertsHelper.GetInstance().DisplayAlert(Color.Black, Color.White, "Add Note", "", "save", "Cancel", null, (obj) =>
                 {

@@ -205,10 +205,7 @@ namespace ModernAlerts.Droid
                         {
                             getinput_et.SetBackgroundColor(config.BackgroundColor.ToAndroid());
                             getinput_et.SetTextColor(config.FontColor.ToAndroid());
-                            getinput_et.Hint = config.placeholder;
-                            if (!string.IsNullOrEmpty(config.DefaultValue))
-                                getinput_et.Text = config.DefaultValue;
-
+                            getinput_et.Hint = config.placeholder; 
                             if (config.keyboard == Keyboard.Telephone)
                             {
                                 getinput_et.InputType = InputTypes.ClassPhone;
@@ -221,26 +218,27 @@ namespace ModernAlerts.Droid
                             {
                                 if (config.isMultipleLine)
                                 {
-                                    getinput_et.InputType = InputTypes.TextFlagMultiLine;
-                                    getinput_et.SetHorizontallyScrolling(false);
-                                    //getinput_et.SetMinLines(3);
-                                    getinput_et.SetLines(3);
+                                    setMultiLine(getinput_et);
                                 }
                                 else
                                 {
                                     getinput_et.InputType = InputTypes.ClassText;
-                                }
-
-
+                                } 
                             }
                             else if (config.keyboard == Keyboard.Email)
                             {
                                 getinput_et.InputType = InputTypes.TextVariationEmailAddress;
-                            }
+                            }  
                             if (config.MaxLength != 0)
                                 getinput_et.SetFilters(new IInputFilter[] { new InputFilterLengthFilter(config.MaxLength) });
                         }
                         getinputll.Visibility = ViewStates.Visible;
+                        if(string.IsNullOrEmpty(content))
+                        {
+                            LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent);
+                            ll.SetMargins(0, 30, 0, 0);
+                            getinputll.LayoutParameters=ll;
+                        }
                     }
                     if (negativeButton != null)
                     {
@@ -279,6 +277,11 @@ namespace ModernAlerts.Droid
                         alertdialog.Window.SetSoftInputMode(SoftInput.StateAlwaysVisible);
                     }
                     alertdialog.Show();
+                    if (config!=null&&!string.IsNullOrEmpty(config.DefaultValue))
+                    {
+                        getinput_et.Text = config.DefaultValue;
+                        getinput_et.SetSelection(getinput_et.Text.Length);
+                    }
                     ShowShadow(alertdialog);
                 });
             }
@@ -289,6 +292,20 @@ namespace ModernAlerts.Droid
             return alercon;
         }
 
+        void setMultiLine(EditText getinput_et)
+        {
+            try
+            {
+                if (getinput_et == null) return;
+                getinput_et.InputType = InputTypes.TextFlagMultiLine;
+                getinput_et.SetHorizontallyScrolling(false); 
+                getinput_et.SetLines(3);
+            }
+            catch(Exception e)
+            {
+
+            }
+        }
         public ISpanned fromHtml(String source)
         {
             if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.N)

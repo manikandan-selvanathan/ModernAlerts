@@ -45,12 +45,22 @@ namespace ModernAlerts.IOS
                 })); 
                 //Customization/Hack
                 UIView[] array = pushView.View.Subviews;
-                array[0].Subviews[0].TintColor = fontColor.ToUIColor();
+                //array[0].Subviews[0].TintColor = fontColor.ToUIColor();
 
+                int i = 0;
                 foreach (var item in array[0].Subviews[0].Subviews[0].Subviews)
                 {
-                    item.BackgroundColor = backgroundcolor.ToUIColor();
-                } 
+                    if(i==1)
+                    {
+                        item.BackgroundColor = backgroundcolor.ToUIColor();
+                    }
+                    i++;
+                }
+
+                foreach(var item in array[0].Subviews)
+                {
+                    item.BackgroundColor = UIColor.Green;
+                }
                 UIStringAttributes titlecolor = new UIStringAttributes
                 {
                     ForegroundColor = fontColor.ToUIColor(),
